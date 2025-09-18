@@ -2,6 +2,116 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Psyforge Psychedelic Fun</title>
+<style>
+  html,body{
+    height:100%; margin:0; overflow:hidden;
+    font-family:"Luckiest Guy","Comic Sans MS",cursive,system-ui,sans-serif;
+    color:#fff; background:#000;
+  }
+
+  /* Background image */
+  .bg{
+    position:fixed; inset:0; z-index:0;
+    background-image: url("https://i.imgur.com/Tz3AOMI.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Title overlay */
+  .portal{
+    position:fixed; inset:0; z-index:9999;
+    display:grid; place-items:center; padding:24px;
+  }
+  .card{
+    text-align:center; background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:16px; padding:clamp(14px,3vw,32px);
+    backdrop-filter:blur(8px) saturate(120%);
+    box-shadow:0 16px 60px rgba(0,0,0,.45),
+               inset 0 0 0 1px rgba(255,255,255,.06);
+  }
+
+  /* ENTER button */
+  .enter{
+    appearance:none; border:0; cursor:pointer; font-weight:900; letter-spacing:.6px;
+    font-size:clamp(18px,3.2vw,28px);
+    padding:.9em 2.2em; border-radius:999px; color:#031b1a;
+    background:linear-gradient(45deg,#ff00ff,#00ffff,#ff9900,#7dffb3);
+    background-size:300% 300%;
+    animation:btnShift 6s ease infinite, btnPulse 1.8s ease-in-out infinite;
+    box-shadow:0 12px 32px rgba(0,0,0,.35),
+               0 0 0 3px rgba(255,255,255,.15) inset;
+  }
+  @keyframes btnShift{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  @keyframes btnPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.04)}
+  }
+
+  /* Fade when hiding overlay */
+  .portal.hide{animation:fade .35s ease forwards}
+  @keyframes fade{to{opacity:0; transform:scale(.98)}}
+
+  /* Reappear button */
+  .re{
+    position:fixed; left:10px; bottom:10px; z-index:10000;
+    font-size:11px; padding:4px 7px; border-radius:7px;
+    background:rgba(0,0,0,.55); color:#dffcff;
+    border:1px solid rgba(255,255,255,.65);
+    cursor:pointer; opacity:.65;
+  }
+  .re:hover{opacity:1}
+</style>
+</head>
+<body>
+
+<!-- ===== TITLE OVERLAY ===== -->
+<div class="bg"></div>
+
+<section class="portal" id="portal">
+  <div class="card">
+    <button class="enter" id="enterBtn">ENTER</button>
+  </div>
+</section>
+
+<button class="re" id="reBtn" title="Reappear">re</button>
+<!-- ===== END TITLE OVERLAY ===== -->
+
+<!-- ===== YOUR KALEIDOSCOPE CODE GOES BELOW ===== -->
+<!-- Example placeholder -->
+<canvas id="kaleidoCanvas"></canvas>
+<!-- Replace with your real kaleidoscope HTML/JS -->
+<!-- ============================================= -->
+
+<script>
+  const portal = document.getElementById('portal');
+  const enter = document.getElementById('enterBtn');
+  const reBtn = document.getElementById('reBtn');
+
+  enter.addEventListener('click',(e)=>{
+    e.preventDefault();
+    portal.classList.add('hide');
+    setTimeout(()=> portal.style.display='none',350);
+  });
+
+  reBtn.addEventListener('click',()=>{
+    portal.style.display='grid';
+    requestAnimationFrame(()=> portal.classList.remove('hide'));
+  });
+</script>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
 <meta name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <title>PsyForge Kaleidoscope — Touch Safe + Working Record</title>
